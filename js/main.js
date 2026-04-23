@@ -61,12 +61,97 @@
   }
 
   // --- Seller Locations Map ---
+  var ALL_PRODUCTS = ['arktika', 'arktika-eriti-kange', 'xtreme', 'black'];
+
   var PRODUCT_LABELS = {
     'arktika': 'Arktika',
     'arktika-eriti-kange': 'Arktika eriti kange',
     'xtreme': 'X-TREME',
     'black': 'Black'
   };
+
+  // Google Sheets published CSV URL — replace SHEET_ID with your sheet's ID
+  // To get this URL: File → Share → Publish to web → Sheet1 → CSV → Publish
+  var SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/1LcnkW2Ke73EhaRKInpGiN1NZDmD_WcqHMSpcg995yKg/export?format=csv';
+
+  // Fallback to local JSON if Sheets URL is not configured
+  var useSheets = SHEETS_CSV_URL.indexOf('docs.google.com') !== -1;
+
+  function parseCSV(text) {
+    var lines = text.split('\n');
+    var stores = [];
+    // Skip header row
+    for (var i = 1; i < lines.length; i++) {
+      var line = lines[i].trim();
+      if (!line) continue;
+
+      var fields = parseCSVLine(line);
+      if (fields.length < 5) continue;
+
+      var name = fields[0].trim();
+      var chain = fields[1] ? fields[1].trim() : '';
+      var address = fields[2] ? fields[2].trim() : '';
+      var lat = parseFloat(fields[3]);
+      var lng = parseFloat(fields[4]);
+
+      if (!name || isNaN(lat) || isNaN(lng)) continue;
+
+      // Product columns: indices 5-8 (Arktika, Arktika eriti kange, X-TREME, Black)
+      var products = [];
+      var productSlugs = ALL_PRODUCTS;
+      for (var p = 0; p < productSlugs.length; p++) {
+        var val = fields[5 + p] ? fields[5 + p].trim().toLowerCase() : '';
+        if (val === 'x' || val === '1' || val === 'yes' || val === 'jah' || val === 'true') {
+          products.push(productSlugs[p]);
+        }
+      }
+
+      // If no products marked, default to all products
+      if (products.length === 0) {
+        products = ALL_PRODUCTS.slice();
+      }
+
+      stores.push({
+        name: name,
+        chain: chain,
+        address: address,
+        lat: lat,
+        lng: lng,
+        products: products
+      });
+    }
+    return stores;
+  }
+
+  function parseCSVLine(line) {
+    var fields = [];
+    var current = '';
+    var inQuotes = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line[i];
+      if (inQuotes) {
+        if (ch === '"' && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else if (ch === '"') {
+          inQuotes = false;
+        } else {
+          current += ch;
+        }
+      } else {
+        if (ch === '"') {
+          inQuotes = true;
+        } else if (ch === ',') {
+          fields.push(current);
+          current = '';
+        } else {
+          current += ch;
+        }
+      }
+    }
+    fields.push(current);
+    return fields;
+  }
 
   var mapContainer = document.getElementById('sellersMap');
   if (mapContainer && typeof L !== 'undefined') {
@@ -179,28 +264,47 @@
       });
     }
 
-    // Fetch store data and initialize markers
-    fetch('data/stores.json')
-      .then(function (response) {
-        if (!response.ok) throw new Error('Failed to load store data');
-        return response.json();
-      })
-      .then(function (stores) {
-        allStores = stores;
+    function loadStores(stores) {
+      allStores = stores;
 
-        stores.forEach(function (store) {
-          var marker = L.marker([store.lat, store.lng]);
-          marker.bindPopup(buildPopupHtml(store), { maxWidth: 260 });
-          allMarkers.push({ marker: marker, store: store });
-          clusterGroup.addLayer(marker);
-        });
-
-        map.addLayer(clusterGroup);
-        updateCount(stores.length);
-        initFilters();
-      })
-      .catch(function (err) {
-        console.warn('Seller map: could not load store data.', err);
+      stores.forEach(function (store) {
+        var marker = L.marker([store.lat, store.lng]);
+        marker.bindPopup(buildPopupHtml(store), { maxWidth: 260 });
+        allMarkers.push({ marker: marker, store: store });
+        clusterGroup.addLayer(marker);
       });
+
+      map.addLayer(clusterGroup);
+      updateCount(stores.length);
+      initFilters();
+    }
+
+    // Fetch store data from Google Sheets (CSV) or fall back to local JSON
+    if (useSheets) {
+      fetch(SHEETS_CSV_URL)
+        .then(function (response) {
+          if (!response.ok) throw new Error('Failed to load sheet');
+          return response.text();
+        })
+        .then(function (csv) {
+          loadStores(parseCSV(csv));
+        })
+        .catch(function (err) {
+          console.warn('Seller map: Google Sheets failed, falling back to local data.', err);
+          fetch('data/stores.json')
+            .then(function (r) { return r.json(); })
+            .then(loadStores);
+        });
+    } else {
+      fetch('data/stores.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Failed to load store data');
+          return response.json();
+        })
+        .then(loadStores)
+        .catch(function (err) {
+          console.warn('Seller map: could not load store data.', err);
+        });
+    }
   }
 })();
