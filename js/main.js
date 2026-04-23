@@ -60,6 +60,27 @@
     });
   }
 
+  // --- Distributors logo ticker ---
+  var grid = document.querySelector('.distributors__grid');
+  if (grid) {
+    var items = Array.from(grid.children);
+    var track = document.createElement('div');
+    track.className = 'distributors__track';
+
+    // Move original items into track
+    items.forEach(function (item) {
+      track.appendChild(item);
+    });
+
+    // Duplicate items for seamless loop
+    items.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      track.appendChild(clone);
+    });
+
+    grid.appendChild(track);
+  }
+
   // --- Seller Locations Map ---
   var ALL_PRODUCTS = ['arktika', 'arktika-eriti-kange', 'xtreme', 'black'];
 
@@ -161,9 +182,10 @@
       scrollWheelZoom: false
     });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 18
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      maxZoom: 20,
+      subdomains: 'abcd'
     }).addTo(map);
 
     // Enable scroll zoom only after clicking the map (avoids hijacking page scroll)
