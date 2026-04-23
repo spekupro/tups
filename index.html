@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TUPS — Eestis toodetud nikotiinipatjade bränd</title>
+  <meta name="description" content="TUPS on Eestis toodetud nikotiinipatjade bränd. Kvaliteetsed nikotiinipadjad igapäevasele tarvitajale.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin="">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="#" class="nav__logo">
+        <img src="images/logo-tups-white.png" alt="TUPS" class="nav__logo-img">
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Ava menüü" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav__links" id="navLinks">
+        <a href="#tooted" class="nav__link">Tooted</a>
+        <a href="#edasimuujad" class="nav__link">Edasimüüjad</a>
+        <div class="nav__social">
+          <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+        <a href="#kontakt" class="nav__btn">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__pattern"></div>
+    <div class="hero__content container">
+      <div class="hero__text">
+        <h1>Eestis toodetud<br>nikotiinipatjade bränd</h1>
+        <a href="#tooted" class="hero__cta">Vaata meie tooteid <span>&rsaquo;</span></a>
+      </div>
+      <div class="hero__image">
+        <img src="images/toode-tups-arktika.webp" alt="TUPS Arktika nikotiinipadjad">
+      </div>
+    </div>
+    <div class="hero__stripe"></div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="tooted">
+    <div class="container">
+
+      <div class="product product--img-left fade-in">
+        <div class="product__image">
+          <img src="images/toode-tups-arktika.webp" alt="TUPS Arktika kange">
+        </div>
+        <div class="product__text">
+          <h3>TUPS Arktika (kange)</h3>
+          <p>TUPS Arktika (kange) nikotiinipadjad on Eestis toodetud! Arktika nimi viitab jahedusele ja seda TUPS Arktika ka pakub, kombineerides nii piparmünti, münti ja mentooli. Padjad on väga hea kvaliteediga ning tagavad parima kasutajakogemuse.</p>
+          <p>TUPS Arktika (kange) sobib eelkõige kogenud ja igapäevasele nikotiinipatjade tarvitajale, kes hindab kvaliteeti, neutraalset maitset ja tugevat nikotiinikogust.</p>
+          <p class="product__meta"><strong>Maitsed: Piparmünt, münt, mentool</strong></p>
+          <p class="product__meta"><strong>Patju karbis: 21</strong></p>
+        </div>
+      </div>
+
+      <div class="product product--img-right fade-in">
+        <div class="product__text">
+          <h3>TUPS Arktika (eriti kange)</h3>
+          <p>TUPS Arktika (eriti kange) nikotiinipadjad on Eestis toodetud! Arktika nimi viitab jahedusele ja seda TUPS Arktika ka pakub, kombineerides nii piparmünti, münti ja mentooli. Padjad on väga hea kvaliteediga ning tagavad parima kasutajakogemuse.</p>
+          <p>TUPS Arktika (eriti kange) sobib eelkõige väga kogenud ja igapäevasele nikotiinipatjade tarvitajale, kes hindab kvaliteeti, neutraalset maitset ja väga tugevat nikotiinikogust.</p>
+          <p class="product__meta"><strong>Maitsed: Piparmünt, münt, mentool</strong></p>
+          <p class="product__meta"><strong>Patju karbis: 21</strong></p>
+        </div>
+        <div class="product__image">
+          <img src="images/tups-arktika-uli-kange.webp" alt="TUPS Arktika eriti kange">
+        </div>
+      </div>
+
+      <div class="product product--img-left fade-in">
+        <div class="product__image">
+          <img src="images/tups-xtreme.png" alt="TUPS X-TREME">
+        </div>
+        <div class="product__text">
+          <h3>TUPS X-TREME</h3>
+          <p>TUPS X-TREME nikotiinipadjad on Eestis toodetud! Kombineerides piparmünti ja münti on maitse jahe aga magus. Padjad on väga hea kvaliteediga ning tagavad parima kasutajakogemuse.</p>
+          <p class="product__meta"><strong>Maitsed: Piparmünt, münt, mentool</strong></p>
+          <p class="product__meta"><strong>Patju karbis: 27</strong></p>
+        </div>
+      </div>
+
+      <div class="product product--img-right fade-in">
+        <div class="product__text">
+          <h3>TUPS Black</h3>
+          <p>TUPS Black nikotiinipadjad on Eestis toodetud! Kombineerides piparmünti ja münti on maitse jahe aga magus. Padjad on väga hea kvaliteediga ning tagavad parima kasutajakogemuse.</p>
+          <p class="product__meta"><strong>Maitsed: Piparmünt, münt</strong></p>
+          <p class="product__meta"><strong>Patju karbis: 20</strong></p>
+        </div>
+        <div class="product__image">
+          <img src="images/tups-black.png" alt="TUPS Black">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Distributors + Seller Map -->
+  <section class="distributors" id="edasimuujad">
+    <div class="container">
+      <h2>Edasimüüjad</h2>
+      <div class="distributors__grid">
+        <a href="https://www.circlek.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/circlek.svg" alt="Circle K">
+        </a>
+        <a href="https://www.alexela.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/alexela.webp" alt="Alexela">
+        </a>
+        <a href="https://www.superalko.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/superalko.webp" alt="Super Alko">
+        </a>
+        <a href="https://www.olerex.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/olerex.webp" alt="Olerex">
+        </a>
+        <a href="https://www.cityalko.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/city-alko.webp" alt="City Alko">
+        </a>
+        <a href="https://www.grossi.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/grossi.webp" alt="Grossi Toidukaubad">
+        </a>
+        <a href="https://www.rkiosk.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/rkiosk.webp" alt="R-Kiosk">
+        </a>
+        <a href="https://www.terminal.ee" target="_blank" rel="noopener" class="distributors__item">
+          <img src="images/distributors/terminal.webp" alt="Terminal">
+        </a>
+      </div>
+
+      <hr class="distributors__divider">
+
+      <div class="sellers-map" id="muugikohad">
+        <h3 class="sellers-map__title">Leia lähim müügikoht</h3>
+        <div class="map-filters" id="mapFilters">
+          <button class="map-filter map-filter--reset" data-filter="all">Kõik tooted</button>
+          <button class="map-filter" data-filter="arktika">Arktika</button>
+          <button class="map-filter" data-filter="arktika-eriti-kange">Arktika eriti kange</button>
+          <button class="map-filter" data-filter="xtreme">X-TREME</button>
+          <button class="map-filter" data-filter="black">Black</button>
+        </div>
+        <p class="sellers-map__count" id="mapCount"></p>
+        <div class="sellers-map__container" id="sellersMap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="kontakt">
+    <div class="container">
+      <h2>Kontakt</h2>
+      <div class="contact__columns">
+        <div class="contact__col">
+          <h3>Tootja</h3>
+          <p class="contact__company">Nano OÜ</p>
+          <p>E-post: <a href="mailto:info@nanotech.ee">info@nanotech.ee</a></p>
+          <p>Veeb: <a href="https://www.nanoest.com" target="_blank" rel="noopener">www.nanoest.com</a></p>
+          <p>Aadress: Suur-Sõjamäe 31, 11415 Tallinn</p>
+          <p>Reg. nr: 11382007</p>
+          <p>KMKR: EE101528818</p>
+        </div>
+        <div class="contact__col">
+          <h3>Edasimüüja</h3>
+          <p class="contact__company">Nordista OÜ</p>
+          <p>Tel: <a href="tel:+3727404444">+372 740 4444</a></p>
+          <p>E-post: <a href="mailto:info@nordista.eu">info@nordista.eu</a></p>
+          <p>Veeb: <a href="https://www.nordista.eu" target="_blank" rel="noopener">www.nordista.eu</a></p>
+          <p>Aadress: Vinkli tn 2, 50411 Tartu</p>
+          <p>Reg. nr: 12711752</p>
+          <p>KMKR: EE102273421</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 TUPS. Kõik õigused kaitstud.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
